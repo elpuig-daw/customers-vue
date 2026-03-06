@@ -13,10 +13,10 @@ onMounted(async () => {
     const id = route.params.id; // Agafem l'id de la URL
     console.log("id del customer: ", id);
     // Podem buscar-lo directament al Store si ja els tenim tots carregats
-    // customer.value = customerStore.customers.find(c => c.id == id);
+    customer.value = customerStore.customers.find(c => c.id == id);
     
     // fer un fetch al backend per si l'usuari refresca la pàgina
-     customer.value = await customerStore.getCustomerById(id);
+     //customer.value = await customerStore.getCustomerById(id);
 });
 </script>
 

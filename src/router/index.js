@@ -20,7 +20,7 @@ const router = createRouter({
             path: "/customers/:id", // L'id és dinàmic
             name: "customer-detail",
             component: CustomerDetail,
-            props: true // Això permet que l'id arribi com a prop al component 
+            //props: true // Això permet que l'id arribi com a prop al component 
         }
     ]
 })

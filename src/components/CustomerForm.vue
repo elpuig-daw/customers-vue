@@ -26,7 +26,7 @@ const handleSubmit = async () => {
         <input v-model="newCustomer.firstName" placeholder="Nom" required>
         <input v-model="newCustomer.lastName" placeholder="Cognom" required>
         <input v-model="newCustomer.email" type="email" placeholder="Email" required>
-        <button type="submit">Afegir Client</button>
+        <button type="submit">Afegir</button>
     </form>
 </template>
 
@@ -40,6 +40,21 @@ const handleSubmit = async () => {
     background: #f8f9fa;
     border-radius: 8px;
 }
-input { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-button { background: #4f46e5; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+.add-form input {
+    flex: 1 1 200px;    /* MÀGIA: Creix, s'encull i té una base de 200px */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 0;       /* Evita que l'input desbordi el seu pare */
+}
+
+.add-form button {
+    flex: 1 1 20%;     /* El botó ocuparà tota la línia per destacar */
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
 </style>

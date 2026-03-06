@@ -62,4 +62,6 @@ export const useCustomerStore = defineStore("customers", () => {
     };
     
 
+}, {
+    persist: true
 });
