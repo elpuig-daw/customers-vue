@@ -8,7 +8,8 @@ const customerStore = useCustomerStore();
 const newCustomer = ref({
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    incidencies: []
 });
 
 const handleSubmit = async () => {
@@ -17,7 +18,7 @@ const handleSubmit = async () => {
     
     await customerStore.addCustomer(newCustomer.value);
     // Netegem el formulari després d'enviar
-    newCustomer.value = { firstName: '', lastName: '', email: '' };
+    newCustomer.value = { firstName: '', lastName: '', email: '', incidencies: [] };
 };
 </script>
 
