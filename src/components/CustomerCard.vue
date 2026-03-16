@@ -9,17 +9,17 @@ const props = defineProps( {
 </script>
 
 <template>
-    <div class="customer-card" v-if="props.customer">
-      <div class="card-header">
-        <div class="avatar">
-          {{ props.customer?.firstName.charAt(0) }}{{ props.customer?.lastName.charAt(0) }}
-        </div>
-        <div class="header-info">
-          <h3>{{ props.customer?.firstName }} {{ props.customer?.lastName }}</h3>
-          <span class="id-badge">ID: #{{ props.customer?.id }}</span>
-        </div>
+  <article class="customer-card" v-if="props.customer">
+    <div class="card-header">
+      <div class="avatar">
+        {{ props.customer?.firstName.charAt(0) }}{{ props.customer?.lastName.charAt(0) }}
       </div>
-    
+      <div class="header-info">
+        <h3>{{ props.customer?.firstName }} {{ props.customer?.lastName }}</h3>
+        <span class="id-badge">ID: #{{ props.customer?.id }}</span>
+      </div>
+    </div>
+
     <div class="card-body">
       <div class="info-item">
         <span class="label">Email</span>
@@ -32,112 +32,166 @@ const props = defineProps( {
         </span>
       </div>
     </div>
-    
+
     <div class="card-footer">
-      <router-link :to="{ name: 'customer-detail', params: { id: customer.id } }">
-    <button class="btn-detail">Veure detalls</button>
-  </router-link>
+      <router-link class="detail-link" :to="{ name: 'customer-detail', params: { id: props.customer.id } }">
+        Veure detalls
+      </router-link>
     </div>
-  </div>
+  </article>
 
 </template>
 
-<style>
+<style scoped>
 .customer-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid #f0f0f0;
-  max-width: 350px;
+  --card-bg: #ffffff;
+  --card-text: #0f172a;
+  --card-muted: #55627a;
+  --card-border: #d8e0ee;
+  --card-soft: #eef3fb;
+  --card-accent: #34d399;
+
+  background: linear-gradient(160deg, #ffffff 0%, #fbfdff 100%);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  color: var(--card-text);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 100%;
+  padding: 1.2rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
 .customer-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: #c7d3e6;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  transform: translateY(-3px);
 }
 
 .card-header {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
 }
 
 .avatar {
-  width: 48px;
-  height: 48px;
-  background-color: #4f46e5; /* Color lila/blau modern */
-  color: white;
-  border-radius: 50%;
-  display: flex;
   align-items: center;
+  background: radial-gradient(circle at 30% 20%, #3dd7a3 0%, #0f9f76 100%);
+  border-radius: 50%;
+  color: #ecfdf5;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 700;
   justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
+  min-height: 2.9rem;
+  min-width: 2.9rem;
 }
 
 .header-info h3 {
+  font-size: 1.03rem;
+  font-weight: 700;
+  line-height: 1.2;
   margin: 0;
-  font-size: 1.1rem;
-  color: #1f2937;
 }
 
 .id-badge {
-  font-size: 0.75rem;
-  color: #6b7280;
-  background: #f3f4f6;
-  padding: 2px 8px;
-  border-radius: 12px;
+  background: var(--card-soft);
+  border: 1px solid #dce5f2;
+  border-radius: 999px;
+  color: #5a6680;
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  padding: 0.15rem 0.55rem;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .info-item {
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
 }
 
 .label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  color: #9ca3af;
+  color: #7a869e;
+  font-size: 0.72rem;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .value {
-  font-size: 0.95rem;
-  color: #374151;
+  color: var(--card-muted);
+  font-size: 0.94rem;
+  overflow-wrap: anywhere;
 }
 
 .status-tag {
+  border-radius: 999px;
   display: inline-block;
-  font-size: 0.85rem;
-  margin-top: 4px;
+  font-size: 0.79rem;
+  font-weight: 600;
+  margin-top: 0.1rem;
+  padding: 0.15rem 0.5rem;
 }
 
-.status-tag.active { color: #059669; font-weight: 500; }
-.status-tag.empty { color: #9ca3af; }
+.status-tag.active {
+  background-color: rgba(52, 211, 153, 0.12);
+  color: #047857;
+}
 
-.btn-detail {
+.status-tag.empty {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+.detail-link {
+  background: #f8fafc;
+  border: 1px solid #d6deeb;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #0f172a;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 600;
+  justify-content: center;
+  max-width: 100%;
+  padding: 0.58rem 0.9rem;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
   width: 100%;
-  margin-top: 1.5rem;
-  padding: 0.6rem;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
 }
 
-.btn-detail:hover {
-  background: #f9fafb;
-  border-color: #d1d5db;
+.detail-link:hover {
+  background-color: #f1f5f9;
+  border-color: #bfcce0;
+  transform: translateY(-1px);
+}
+
+.detail-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+  border-color: rgba(52, 211, 153, 0.55);
+}
+
+@media (max-width: 640px) {
+  .customer-card {
+    padding: 1rem;
+  }
+
+  .card-header {
+    gap: 0.75rem;
+  }
 }
 </style>
