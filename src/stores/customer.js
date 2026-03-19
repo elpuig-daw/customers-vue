@@ -3,16 +3,18 @@ import { ref } from "vue";
 
 
 export const useCustomerStore = defineStore("customers", () => {
-    const API_URL = "http://localhost:8080/customers";
+    //const API_URL = "http://localhost:8080/customers";
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const customers = ref([]);
     const loading = ref(false);
     const error = ref(false);
 
     const getCustomers = async () => {
+        console.log("api:",API_URL);
         loading.value = true;
         try {
-            const response = await fetch(API_URL);
+            const response = await fetch(`${API_URL}/customers`);
             const data = await response.json();
             customers.value = data;
             error.value = false
