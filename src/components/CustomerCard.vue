@@ -12,7 +12,7 @@ const props = defineProps( {
   <article class="customer-card" v-if="props.customer">
     <div class="card-header">
       <div class="avatar">
-        {{ props.customer?.firstName.charAt(0) }}{{ props.customer?.lastName.charAt(0) }}
+        {{ props.customer?.firstName?.charAt(0) }}{{ props.customer?.lastName?.charAt(0) }}
       </div>
       <div class="header-info">
         <h3>{{ props.customer?.firstName }} {{ props.customer?.lastName }}</h3>
@@ -34,7 +34,7 @@ const props = defineProps( {
     </div>
 
     <div class="card-footer">
-      <router-link class="detail-link" :to="{ name: 'customer-detail', params: { id: props.customer.id } }">
+      <router-link class="detail-link" :to="{ name: 'customer-detail', params: { id: customer.id } }">
         Veure detalls
       </router-link>
     </div>
